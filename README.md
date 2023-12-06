@@ -21,12 +21,24 @@
 
 <h3> Funcion Principal </h3>
 
-- Juego un poco lento
-- Colisiones no tan precisas
-- Disparos desaparecen cuando muere enemigo
-- Sonido de pausa no sincronizado con el del menu
-- Cambio de nombre poco intuitivo
-- Ranking permanente a los 5 mejores puestos
+Esta funcion se encarga de encender y apagar los display dependiendo del numero que se le inserte.
+
+prenderDisplay y printNum son 2 importantes partes del proyecto que se encargan de hacer funcionar los display, uno se encarga de saber que display se tiene que prender y el otro que numero se va a ver en dicho display.
+
+````
+void imprimirCuenta(int num)
+{
+  prenderDisplay(APAGADO);
+  printNum(num/10);
+  prenderDisplay(UNIDAD);
+  delay(50);
+  prenderDisplay(APAGADO);
+  printNum(num - 10*((int)num/10));
+  prenderDisplay(DECENA);
+  delay(50);
+}
+
+````
 
 <h3> Link del proyecto </h3>
 
