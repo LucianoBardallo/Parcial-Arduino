@@ -2,7 +2,7 @@
 
 ![image_text](https://github.com/LucianoBardallo/Parcial-Arguino/blob/main/img/ArduinoTinkercad.jpg?raw=true)
 
-<h3> Integrantes </h3>
+<h3> Integrante </h3>
 
 - Luciano Bardallo
 
