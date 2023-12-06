@@ -12,10 +12,12 @@
 
 <h3> Descripcion </h3>
 
-- Agregar mas variedad de niveles
-- Pulir aniamaciones y comportamiento de los enemeigos
-- Añadir mas variedad de objetos y objetivos
-- Manejar el juego de manera mas fluida
+- Suma y resta de numeros mostrados en dos 7 segmentos y conectados con botones
+- Cambio de modo con un swtich (Numeros normales y Numeros primos)
+- Motor de afisionado que funciona en una direccion u otra dependiendo el boton presionado
+- Sensor de fuerza que cambia el tiempo de delay dependiendo de su valor
+- Sensor de luz que muestra algo en el monitor serial dependiendo de su valor y cual boton se presiona
+ 
 
 <h3> Funcion Principal </h3>
 
