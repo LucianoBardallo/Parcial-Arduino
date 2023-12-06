@@ -1,0 +1,277 @@
+// C++ code
+// PRIMER PARCIAL
+// BARDALLO LUCIANO
+
+#define BAJA 2
+#define SUBE 3
+#define SWITCH 4
+#define C 5
+#define D 6
+#define E 7
+#define G 8
+#define F 9
+#define A 10
+#define B 11
+#define UNIDAD A4
+#define DECENA A5
+#define APAGADO 0
+#define DELAY 10
+#define POSITIVO 12
+#define NEGATIVO 13
+#define FUERZA A0
+#define SENSOR A3
+
+void setup()
+{
+  pinMode(BAJA, INPUT_PULLUP);
+  pinMode(SUBE, INPUT_PULLUP);
+  pinMode(SWITCH, INPUT_PULLUP);
+  pinMode(POSITIVO, OUTPUT);
+  pinMode(NEGATIVO, OUTPUT);
+  pinMode(FUERZA, OUTPUT);
+  pinMode(SENSOR, INPUT);
+  pinMode(A,OUTPUT);
+  pinMode(B,OUTPUT);
+  pinMode(C,OUTPUT);
+  pinMode(D,OUTPUT);
+  pinMode(E,OUTPUT);
+  pinMode(F,OUTPUT);
+  pinMode(G,OUTPUT);
+  pinMode(UNIDAD, OUTPUT);
+  pinMode(DECENA, OUTPUT);
+  digitalWrite(UNIDAD,0);
+  digitalWrite(DECENA,0);
+  Serial.begin(9600);
+  imprimirCuenta(0);
+}
+
+int num = 0;
+int valorDelSensor;
+
+void loop()
+{
+  int fuerza = analogRead(FUERZA); //Toma el valor de la fuerza
+  valorDelSensor = analogRead(SENSOR); //Toma el valor del sensor
+  if(valorDelSensor != 1023){
+  	Serial.println(valorDelSensor);
+  }
+  
+  if(digitalRead(SUBE) == 0)
+    { 
+    num++;
+    delay(fuerza*DELAY); //Multiplica la fuerza por el valor de Delay(10)
+    digitalWrite(POSITIVO,1); //Si apreta el boton sube el motor se mueve para adelante
+    digitalWrite(NEGATIVO,0);
+    if(valorDelSensor > 18 && valorDelSensor != 1023) //Muestra texto si el sensor cumple las condiciones
+    {
+      Serial.println("SUBE y sensor mayor a 18");
+    }
+    
+    if(num>99)
+    {
+      num=99;
+    }
+  }
+  else if(digitalRead(BAJA) == 0)		
+  {
+    num--;
+    delay(fuerza*DELAY); //Multiplica la fuerza por el valor de Delay(10)
+    digitalWrite(POSITIVO,0); //Si apreta el boton sube el motor se mueve para atras
+    digitalWrite(NEGATIVO,1);
+    
+    if(valorDelSensor <= 18 && valorDelSensor != 1023) //Muestra texto si el sensor cumple las condiciones
+    {
+      Serial.println("BAJA y sensor menor o igual a 18");
+    }
+    
+    if(num<0)
+    {
+      num=0;
+    }
+
+  }
+  
+  
+  if(digitalRead(SWITCH) == 1){  //Numeros normales
+  
+    imprimirCuenta(num);
+  }
+  else {				//Numeros primos
+    imprimirPrimo(num);
+  }
+  
+  
+}
+
+
+void printNum(int num) //Los diferentes digitos
+{
+  digitalWrite(A, LOW);
+  digitalWrite(B, LOW);
+  digitalWrite(C, LOW);
+  digitalWrite(D, LOW);
+  digitalWrite(E, LOW);
+  digitalWrite(F, LOW);
+  digitalWrite(G, LOW);
+  switch(num)
+  {
+    case 0:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, HIGH);
+      digitalWrite(E, HIGH);
+      digitalWrite(F, HIGH);
+      digitalWrite(G, LOW);
+      break;   
+    }
+    case 1:
+    {
+      digitalWrite(A, LOW);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      digitalWrite(E, LOW);
+      digitalWrite(F, LOW);
+      digitalWrite(G, LOW);
+      break;   
+    }
+    case 2:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(D, HIGH);
+      digitalWrite(E, HIGH);
+      digitalWrite(G, HIGH);
+      break;   
+    }
+    case 3:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, HIGH);
+      digitalWrite(G, HIGH);
+      break;   
+    }
+    case 4:
+    {
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(F, HIGH);
+      digitalWrite(G, HIGH);
+      break;   
+    }
+    case 5:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, HIGH);
+      digitalWrite(F, HIGH);
+      digitalWrite(G, HIGH);
+      break;   
+    }
+    case 6:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, HIGH);
+      digitalWrite(E, HIGH);
+      digitalWrite(F, HIGH);
+      digitalWrite(G, HIGH);
+      break;   
+    }
+    case 7:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      break;   
+    }
+    case 8:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, HIGH);
+      digitalWrite(E, HIGH);
+      digitalWrite(F, HIGH);
+      digitalWrite(G, HIGH);
+      break;   
+    }
+    case 9:
+    {
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(F, HIGH);
+      digitalWrite(G, HIGH);
+      break;   
+    }
+  }
+} 
+
+void prenderDisplay(int num) //Prende display dependiendo de la necesidad
+{
+  if (num == UNIDAD) // Solo prende la unidad
+  {
+    digitalWrite(UNIDAD, HIGH);
+    digitalWrite(DECENA, LOW);
+    delay(DELAY);
+  }
+  else if (num == DECENA) // Solo prende la Decena
+  {
+    digitalWrite(UNIDAD, LOW);
+    digitalWrite(DECENA, HIGH);
+    delay(DELAY);
+  }
+  else
+  {
+    digitalWrite(UNIDAD, HIGH); // Prende los dos
+    digitalWrite(DECENA, HIGH);
+  }
+}
+
+void imprimirCuenta(int num) //Imprime el digito normal
+{
+  prenderDisplay(APAGADO);
+  printNum(num/10);
+  prenderDisplay(UNIDAD);
+  delay(50);
+  prenderDisplay(APAGADO);
+  printNum(num - 10*((int)num/10));
+  prenderDisplay(DECENA);
+  delay(50);
+}
+
+void imprimirPrimo(int num) //Imprime si el numero es primo
+{
+  if(esPrimo(num)){
+    prenderDisplay(APAGADO);
+    printNum(num/10);
+    prenderDisplay(UNIDAD);
+    delay(50);
+    prenderDisplay(APAGADO);
+    printNum(num - 10*((int)num/10));
+    prenderDisplay(DECENA);
+    delay(50);
+    Serial.println(num);
+  }
+  
+  
+}
+
+bool esPrimo(int numero) { //Funcion para saber si el numero es primo
+  if (numero <= 1) {
+    return false;
+  }
+
+  for (int i = 2; i <= numero / 2; ++i) {
+    if (numero % i == 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
