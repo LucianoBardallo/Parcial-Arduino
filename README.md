@@ -21,9 +21,9 @@
 
 <h3> Funcion Principal </h3>
 
-Esta funcion se encarga de encender y apagar los display dependiendo del numero que se le inserte.
+- Esta funcion se encarga de encender y apagar los display dependiendo del numero que se le inserte.
 
-prenderDisplay y printNum son 2 importantes partes del proyecto que se encargan de hacer funcionar los display, uno se encarga de saber que display se tiene que prender y el otro que numero se va a ver en dicho display.
+- prenderDisplay y printNum son 2 importantes partes del proyecto que se encargan de hacer funcionar los display, uno se encarga de saber que display se tiene que prender y el otro que numero se va a ver en dicho display.
 
 ````
 void imprimirCuenta(int num)
@@ -42,4 +42,4 @@ void imprimirCuenta(int num)
 
 <h3> Link del proyecto </h3>
 
-https://www.tinkercad.com/things/2krpvcpMDTp-parcial-arduino-pt3/editel?returnTo=%2Fdashboard%3Ftype%3Dcircuits%26collection%3Ddesigns&sharecode=_vNSzYql4ZAnRe9fWm14ci_250Q3tIYyi8gOyxexC3g
+-  [Proyecto](https://www.tinkercad.com/things/2krpvcpMDTp-parcial-arduino-pt3/editel?returnTo=%2Fdashboard%3Ftype%3Dcircuits%26collection%3Ddesigns&sharecode=_vNSzYql4ZAnRe9fWm14ci_250Q3tIYyi8gOyxexC3g)
